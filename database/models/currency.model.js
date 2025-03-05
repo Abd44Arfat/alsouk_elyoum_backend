@@ -19,9 +19,8 @@ const schema =new mongoose.Schema({
 
 
 })
-schema.post('init',function(doc){
-    doc.image=process.env.BASE_URL+"flags/" + doc.image
-    
-    })
+schema.post('init', function(doc) {
+    doc.image = process.env.BASE_URL+"/flags/"+doc.image;
+});
 
-export const Currency = mongoose.model('Currency', schema);
+export const Currency = mongoose.model('Currency', schema); 

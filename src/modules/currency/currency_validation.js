@@ -4,6 +4,8 @@ const addCurrencyValidation = Joi.object({
   name: Joi.string().required().min(3).trim(),
   slug: Joi.string().lowercase(),
   image: Joi.object().required(),
+  rate: Joi.number().required().default(1), 
+
 });
 
 const updateCurrencyValidation = Joi.object({
