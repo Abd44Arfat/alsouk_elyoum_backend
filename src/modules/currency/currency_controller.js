@@ -3,6 +3,7 @@ import { AppError } from "../../utils/appError.js";
 import { catchError } from "../../middlewares/catchError.js";
 import { deleteOne } from "../../utils/handler.js";
 import { Currency } from "../../../database/models/currency.model.js";
+import { ApiFeature } from "../../utils/apiFeature.js";
 const addCurrency = catchError(async (req, res, next) => {
     req.body.slug = slugify(req.body.name);
     req.body.image = req.file.filename;
@@ -14,9 +15,17 @@ const addCurrency = catchError(async (req, res, next) => {
 
 
 const allCurrencies = catchError(async (req, res, next) => {
-    let currency = await Currency.find();
-    res.json({ message: "success", currency });
+    let apiFeatures = new ApiFeature(Currency.find(), req.query)
+        .pagination()
+        .fields()
+        .filter()
+        .sort()
+        .search();
+    
+    let currencies = await apiFeatures.mongooseQuery // Execute the query
+    res.json({ message: "success",page:apiFeatures.pageNumber, currencies });
 });
+
 
 const getCurrency = catchError(async (req, res, next) => {
     let currency = await Currency.findById(req.params.id);
