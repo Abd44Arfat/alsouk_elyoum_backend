@@ -6,7 +6,7 @@ const schema =new mongoose.Schema({
         type: String,
         unique: [true, 'currency name must be unique'],
         trim: true,
-        required: true,
+        required: [true, 'gold name is required'],
         minlength: [3, 'too short currency name'],
     },
   
@@ -26,4 +26,4 @@ const schema =new mongoose.Schema({
 })
 
 
-export const Currency = mongoose.model('Currency', schema); 
+export const Gold = mongoose.model('Gold', schema); 
