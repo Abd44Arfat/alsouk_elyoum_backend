@@ -18,7 +18,6 @@ const addGold = catchError(async (req, res, next) => {
 
 const allGolds = catchError(async (req, res, next) => {
     let apiFeatures = new ApiFeature(Gold.find(), req.query)
-        .pagination()
         .fields()
         .filter()
         .sort()

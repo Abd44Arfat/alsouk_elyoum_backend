@@ -16,7 +16,6 @@ const addCurrency = catchError(async (req, res, next) => {
 
 const allCurrencies = catchError(async (req, res, next) => {
     let apiFeatures = new ApiFeature(Currency.find(), req.query)
-        .pagination()
         .fields()
         .filter()
         .sort()
